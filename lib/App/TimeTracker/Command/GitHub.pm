@@ -41,6 +41,14 @@ sub _build_github_client {
     # optional
     $args{api_uri} = $config->{api_uri} if $config->{api_uri};
 
+    if ( $config->{upstream} ) {
+        for my $fld (qw(user repo)) {
+            error_message( "You set upstream, but did not set '" . $fld . "'!" )
+                unless $config->{upstream}->{$fld};
+            $args{$fld} = $config->{upstream}->{$fld};
+        }
+    }
+
     return Pithub->new(%args);
 }
 
@@ -184,6 +192,15 @@ config.
 Optional.
 
 Set this to the URL of your local GitHub Enterprise installation.
+
+=head3 upstream
+
+Optional.
+
+If the project you are working on has an upstream project where issues are
+handled, then you can set upstream to a hash of user and repo (like on a normal
+project) to fetch issues from there.
+
 
 =head1 NEW COMMANDS
 
