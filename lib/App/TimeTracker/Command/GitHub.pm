@@ -33,14 +33,15 @@ sub _build_github_client {
 
     # required
     for my $fld (qw(user repo token)) {
-        error_message( "Please configure github.".$fld.". in your TimeTracker config" ) unless $config->{$fld};
+        error_message( "Please configure github." . $fld . ". in your TimeTracker config" )
+            unless $config->{$fld};
         $args{$fld} = $config->{$fld};
     }
 
     # optional
     $args{api_uri} = $config->{api_uri} if $config->{api_uri};
 
-    return Pithub->new( %args );
+    return Pithub->new(%args);
 }
 
 before [ 'cmd_start', 'cmd_continue', 'cmd_append' ] => sub {
@@ -50,13 +51,16 @@ before [ 'cmd_start', 'cmd_continue', 'cmd_append' ] => sub {
     my $issuename = 'issue#' . $self->issue;
     $self->insert_tag($issuename);
 
-    my $response = $self->github_client->issues->get(repo=>'App-TimeTracker',issue_id => $self->issue);
-    unless ($response->success) {
-        error_message("Cannot find issue %s in %s/%s",$self->issue,$self->config->{github}->@{'user','repo'});
+    my $cfg = $self->config->{github};
+    my $response =
+        $self->github_client->issues->get( repo => $cfg->{repo}, issue_id => $self->issue );
+    unless ( $response->success ) {
+        error_message( "Cannot find issue %s in %s/%s", $self->issue, $cfg->@{ 'user', 'repo' } );
         return;
     }
     my $issue = $response->content;
-    my $name = $issue->{title};
+    my $name  = $issue->{title};
+
     #use Data::Dumper; $Data::Dumper::Maxdepth=3;$Data::Dumper::Sortkeys=1;warn Data::Dumper::Dumper $data;
 
     if ( defined $self->description ) {
@@ -69,9 +73,9 @@ before [ 'cmd_start', 'cmd_continue', 'cmd_append' ] => sub {
     if ( $self->meta->does_role('App::TimeTracker::Command::Git') ) {
         my $branch = $self->issue;
         if ($name) {
-            $branch = $self->safe_branch_name($self->issue.' '.$name);
+            $branch = $self->safe_branch_name( $self->issue . ' ' . $name );
         }
-        $branch=~s/_/-/g;
+        $branch =~ s/_/-/g;
         $self->branch( lc($branch) ) unless $self->branch;
     }
 
