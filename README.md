@@ -4,7 +4,7 @@ App::TimeTracker::Command::GitHub - App::TimeTracker GitHub plugin
 
 # VERSION
 
-version 1.000
+version 1.001
 
 # DESCRIPTION
 
@@ -48,6 +48,14 @@ Optional.
 
 Set this to the URL of your local GitHub Enterprise installation.
 
+### upstream
+
+Optional.
+
+If the project you are working on has an upstream project where issues are
+handled, then you can set upstream to a hash of user and repo (like on a normal
+project) to fetch issues from there.
+
 # NEW COMMANDS
 
 No new commands
@@ -68,6 +76,10 @@ If `--issue` is set and we can find an issue with this id in your current repo
 - TODO: assign to your user, if `set_assignee` is set and issue is not assigned
 - TODO: reopen a closed issue if `reopen` is set
 - TODO: modifiy the labels by adding all labels listed in `labels_on_start.add` and removing all lables listed in `labels_on_start.add`
+
+# Contributors
+
+- [Thomas MANTL](https://github.com/TM2500)
 
 # AUTHOR
 

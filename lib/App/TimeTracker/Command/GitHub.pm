@@ -6,7 +6,7 @@ use 5.020;
 # ABSTRACT: App::TimeTracker GitHub plugin
 use App::TimeTracker::Utils qw(error_message warning_message);
 
-our $VERSION = "1.000";
+our $VERSION = "1.001";
 
 use Moose::Role;
 use Pithub;
