@@ -232,4 +232,11 @@ If C<--issue> is set and we can find an issue with this id in your current repo
 
 =back
 
+=head1 Contributors
+
+=over
+
+=item * L<Thomas MANTL|https://github.com/TM2500>
+
+=back
 
