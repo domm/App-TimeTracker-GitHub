@@ -4,7 +4,7 @@ App::TimeTracker::Command::GitHub - App::TimeTracker GitHub plugin
 
 # VERSION
 
-version 1.001
+version 1.002
 
 # DESCRIPTION
 
