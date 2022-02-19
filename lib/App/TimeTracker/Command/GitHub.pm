@@ -1,7 +1,7 @@
 package App::TimeTracker::Command::GitHub;
 use strict;
 use warnings;
-use 5.020;
+use 5.024;
 
 # ABSTRACT: App::TimeTracker GitHub plugin
 use App::TimeTracker::Utils qw(error_message warning_message);
